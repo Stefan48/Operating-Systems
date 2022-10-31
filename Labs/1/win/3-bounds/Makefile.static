@@ -1,0 +1,19 @@
+CC = cl
+L = link
+CFLAGS = /nologo /W3
+
+all: bounds_static.exe
+
+#TODO link static lib with object file to create the executable
+bounds_static.exe: bounds.obj bounds_static.lib
+	$(CC) /out:$@ $**
+	
+bounds.obj: bounds.c
+	$(CC) $(CFLAGS) /c $**
+
+#TODO create static lib 
+bounds_static.lib: min.obj max.obj
+	lib /nologo /out:$@ $**
+
+clean:
+	del /Q /F *.obj *.lib *.dll *.exe
